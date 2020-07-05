@@ -1,5 +1,5 @@
 import express, { Application } from "express";
-import testRoutes from "./routes/test";
+import userRoutes from "./routes/user";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
@@ -22,4 +22,4 @@ mongoose
 
 app.use(express.json());
 
-app.use("/test", testRoutes);
+app.use("/user", userRoutes);

@@ -54,3 +54,18 @@ export async function postUser(req: any, res: any) {
     res.status(400).send(err);
   }
 }
+
+export async function deleteUser(req: any, res: any) {
+  const params = req.params as RequestParams;
+  const uid = params.id;
+  const user = await User.findOne({ _id: uid });
+
+  if (!user) return res.status(404).send("User not found");
+
+  try {
+    const savedUser = await user.remove();
+    res.status(200).send(savedUser);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+}

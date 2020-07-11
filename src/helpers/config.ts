@@ -9,4 +9,5 @@ export default {
   MAIL_LOGIN: process.env.MAIL_LOGIN as string,
   MAIL_PASSWORD: process.env.MAIL_PASSWORD as string,
   CLIENT_HREF: process.env.CLIENT_HREF as string,
+  NODE_ENV: process.env.NODE_ENV as string,
 };

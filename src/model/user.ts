@@ -32,7 +32,8 @@ const userSchema = new Schema({
   role: {
     type: String,
     required: true,
-    max: 40,
+    max: 20,
+    default: "User",
   },
   creationDate: {
     type: Date,

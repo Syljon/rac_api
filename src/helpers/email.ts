@@ -11,14 +11,17 @@ dotenv.config();
 var transporter: Mail = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: config.MAIL_LOGIN,
+    user: config.MAIL_LOGIN as string,
     pass: config.MAIL_PASSWORD as string,
   },
 });
 
 function createMailOptions(user: IUser): Mail.Options {
   const token = createToken(user);
-  const link = config.CLIENT_HREF + "/set-password?token=" + token;
+  const link =
+    config.NODE_ENV == "development"
+      ? "http://localhost:3000/"
+      : config.CLIENT_HREF + "/set-password?token=" + token;
   return {
     from: config.MAIL_LOGIN as string,
     to: user.email,
@@ -32,9 +35,13 @@ function createMailOptions(user: IUser): Mail.Options {
 }
 
 export function sendEmail(user: IUser) {
-  const mailOptions: Mail.Options = createMailOptions(user);
-  transporter.sendMail(mailOptions, function (err, info) {
-    if (err) console.log(err);
-    else console.log(info);
-  });
+  try {
+    const mailOptions: Mail.Options = createMailOptions(user);
+    transporter.sendMail(mailOptions, function (err, info) {
+      if (err) console.log(err);
+      else console.log(info);
+    });
+  } catch (err) {
+    throw err;
+  }
 }

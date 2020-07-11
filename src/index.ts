@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import userRoutes from "./routes/user";
+import authRoutes from "./routes/auth";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
@@ -17,9 +18,13 @@ mongoose
     }
   )
   .finally(async () =>
-    app.listen(port, () => console.log("Server Up and running ", port))
+    app.listen(port, () => {
+      console.log("Server Up and running ", port);
+      console.log(process.env.NODE_ENV);
+    })
   );
 
 app.use(express.json());
 
+app.use("/auth", authRoutes);
 app.use("/user", userRoutes);

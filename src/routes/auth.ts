@@ -3,13 +3,31 @@ import * as AuthController from "../controller/auth";
 import validate from "../helpers/validate";
 import * as yup from "yup";
 
-const login = yup.object({
+const Login = yup.object({
   email: yup.string().required(),
   password: yup.string().required(),
 });
 
+const SetPassword = yup.object({
+  token: yup.string().required(),
+  password: yup.string().required(),
+  password2: yup
+    .string()
+    .required()
+    .test("password-match", "Password don't match", function (value) {
+      const { password } = this.parent;
+      return password === value;
+    }),
+});
+
 const router: Router = express.Router();
 
-router.post("/login", validate(login, "body"), AuthController.login);
+router.post("/login", validate(Login, "body"), AuthController.login);
+
+router.post(
+  "/set-password",
+  validate(SetPassword, "body"),
+  AuthController.setPassword
+);
 
 export default router;

@@ -1,4 +1,4 @@
-import User, { IUser } from "../model/user";
+import { User, IUser } from "../model/user";
 import { sendEmail } from "../helpers/email";
 
 type RequestParams = { id: string };

@@ -1,4 +1,4 @@
-import User, { IUser } from "../model/user";
+import { User, IUser } from "../model/user";
 import bcrypt from "bcryptjs";
 import { createToken, decodeToken } from "../helpers/token";
 

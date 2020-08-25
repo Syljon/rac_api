@@ -1,6 +1,3 @@
-import User, { IUser } from "../model/user";
-import bcrypt from "bcryptjs";
-import { decodeToken } from "../helpers/token";
 import { loginService, setPasswordService } from "../services/auth.service";
 
 export async function login(req: any, res: any) {

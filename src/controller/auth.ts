@@ -1,3 +1,4 @@
+import { LoginRequestBody, SetPasswordBody } from "../model/DTO/auth";
 import { loginService, setPasswordService } from "../services/auth.service";
 
 export async function login(req: any, res: any) {

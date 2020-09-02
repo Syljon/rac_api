@@ -1,6 +1,7 @@
 import { User, IUser } from "../model/user";
 import bcrypt from "bcryptjs";
 import { createToken, decodeToken } from "../helpers/token";
+import { LoginRequestBody, SetPasswordBody } from "../model/DTO/auth";
 
 export async function loginService(
   body: LoginRequestBody
